@@ -1,21 +1,364 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="hi">
 <head>
-  <title>shivam's page</title>
+  <meta charset="UTF-8">
+  <title>DAHEJ CALCULATOR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #3a0ca3 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 470px;
+      margin: 40px auto;
+      background: rgba(20, 20, 40, 0.92);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: 0 0 32px rgba(138, 43, 226, 0.5);
+      border: 2px solid rgba(138, 43, 226, 0.5);
+      overflow-y: auto;
+      max-height: 96vh;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.3em;
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: #bb86fc;
+      text-shadow: 0 0 16px #bb86fc, 0 0 30px #9b5de5;
+      animation: bounce 1.2s infinite alternate;
+    }
+    @keyframes bounce {
+      0% {transform: translateY(0);}
+      100% {transform: translateY(-10px);}
+    }
+
+    label {
+      display: block;
+      font-size: 1.08em;
+      margin-bottom: 5px;
+      color: #eee;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      outline: none;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 0 7px rgba(138,43,226,0.23);
+      transition: 0.3s all ease-in-out;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      box-shadow: 0 0 15px #bb86fc;
+      background: rgba(255,255,255,0.13);
+    }
+
+    select[multiple] {
+      height: 90px;
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+    }
+
+    button {
+      background: linear-gradient(90deg, #bb86fc, #9b5de5);
+      color: #fff;
+      padding: 13px 26px;
+      border: none;
+      border-radius: 18px;
+      font-size: 1.18em;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 14px auto 0 auto;
+      display: block;
+      box-shadow: 0 0 14px #bb86fc, 0 0 28px #9b5de5;
+      transition: 0.3s all ease-in-out;
+    }
+
+    button:hover {
+      box-shadow: 0 0 23px #bb86fc, 0 0 50px #9b5de5;
+      transform: scale(1.07);
+    }
+
+    .result-card {
+      margin-top: 22px;
+      background: linear-gradient(117deg, #3a0ca3 55%, #bb86fc 100%);
+      border-radius: 18px;
+      padding: 22px 12px 16px 12px;
+      box-shadow: 0 2px 28px #9b5de5;
+      text-align: center;
+      animation: pop 0.7s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes pop {
+      0% {transform: scale(0.7);}
+      100% {transform: scale(1);}
+    }
+
+    .avatar {
+      font-size: 3.5em;
+      margin-bottom: 6px;
+      animation: avatarPop 1s;
+      filter: drop-shadow(0 0 8px #fff44f);
+    }
+    @keyframes avatarPop {
+      0% {transform: scale(0.2) rotate(-30deg);}
+      60% {transform: scale(1.2) rotate(10deg);}
+      100% {transform: scale(1) rotate(0);}
+    }
+
+    .worth {
+      font-size: 2em;
+      color: #fff44f;
+      background: linear-gradient(90deg, #fff44f, #bb86fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .skill-badges {
+      margin: 10px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+    }
+    .skill-chip {
+      background: linear-gradient(90deg, #bb86fc 60%, #fff44f 100%);
+      color: #1a1a2e;
+      padding: 4px 12px;
+      border-radius: 11px;
+      font-size: 1em;
+      font-weight: 600;
+      box-shadow: 0 1px 5px #9b5de5;
+      display: inline-block;
+      margin-bottom: 2px;
+      animation: chipPop 0.7s;
+    }
+    @keyframes chipPop {
+      0% {transform: scale(0.6);}
+      100% {transform: scale(1);}
+    }
+
+    .tip {
+      margin-top: 12px;
+      font-size: 1.13em;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.11);
+      border-radius: 9px;
+      padding: 12px 8px;
+      text-align: center;
+      animation: fadein 0.9s;
+      font-weight: 500;
+    }
+    @keyframes fadein {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .credit {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.98em;
+      color: #bbb;
+      opacity: 0.82;
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        max-width: 98vw;
+        padding: 13px;
+        margin: 8px auto;
+        max-height: 98vh;
+      }
+      h1 {
+        font-size: 1.18em;
+      }
+      .result-card {
+        padding: 16px 4px 10px 4px;
+      }
+      .worth {
+        font-size: 1.3em;
+      }
+      .avatar {
+        font-size: 2.3em;
+      }
+      .skill-chip {
+        font-size: 0.91em;
+        padding: 2px 8px;
+      }
+    }
+  </style>
 </head>
-<body style="background-color:pink">
-  <h1 >"POEM"</h1>
-  <p style="color:red";>machli jal ki raani hai</p>
-  <p style="color:purple">jivan uska paani hai</p>
-  <p style="color:orange">hath lagao drr jayegi</p>
-  <p style="color:violet">bahar nikalo mar jayegi</p>
-  <p style="color:yellow">twinkle twinkle little star</p>
-  <p style="color: green">how i waonder what u are</p>
-  <p style="color:teal">up above the world so high</p>
-  <p style="color:blue">like a diamond in the sky</p>
-  <p style="color:skyblue">when the blazing sun is gone</p>
-  <p style="color:white">when nothing shine upon</p>
-  
+<body>
+  <div class="container">
+    <h1>DAHEJ CALCULATOR💵</h1>
+    <form id="worthForm">
+      <label for="property">Property (₹):</label>
+      <input type="number" id="property" min="0" placeholder="Apni property ka amount daalo" required>
+
+      <label for="salary">Salary per month (₹):</label>
+      <input type="number" id="salary" min="0" placeholder="Apni mahine ki salary daalo" required>
+
+      <label for="skills">Skills select karo (multiple choose kar sakte ho):</label>
+      <select id="skills" multiple>
+        <option value="Cooking">Cooking 🍳</option>
+        <option value="Dancing">Dancing 💃</option>
+        <option value="Singing">Singing 🎤</option>
+        <option value="Sports">Sports 🏏</option>
+        <option value="Coding">Coding 👨‍💻</option>
+        <option value="Managing">Managing 🗂️</option>
+        <option value="Creativity">Creativity 🎨</option>
+        <option value="Communication">Communication 🗣️</option>
+        <option value="Gardening">Gardening 🌱</option>
+        <option value="Driving">Driving 🚗</option>
+        <option value="Other">Other (Neeche likho)</option>
+      </select>
+      <textarea id="otherSkill" placeholder="Yahan apni special skill likho (agar upar nahi hai)" style="display:none;"></textarea>
+
+      <button type="submit">Calculate Dahej 🚀</button>
+    </form>
+
+    <div id="resultArea"></div>
+    <div class="credit">Programmed by Shivam 😎</div>
+  </div>
+
+  <script>
+    // Avatar pool: 20 fun emojis
+    const avatarPool = [
+      {emoji: "👨‍🍳", skill: "Cooking"},
+      {emoji: "💃", skill: "Dancing"},
+      {emoji: "🎤", skill: "Singing"},
+      {emoji: "🏏", skill: "Sports"},
+      {emoji: "👨‍💻", skill: "Coding"},
+      {emoji: "🗂️", skill: "Managing"},
+      {emoji: "🎨", skill: "Creativity"},
+      {emoji: "🗣️", skill: "Communication"},
+      {emoji: "🌱", skill: "Gardening"},
+      {emoji: "🚗", skill: "Driving"},
+      {emoji: "🦸‍♂️", skill: "All-rounder"},
+      {emoji: "🤹‍♂️", skill: "Multi-talented"},
+      {emoji: "👑", skill: "King"},
+      {emoji: "😎", skill: "Cool Dude"},
+      {emoji: "🤑", skill: "Rich Guy"},
+      {emoji: "🤠", skill: "Desi Swag"},
+      {emoji: "🤓", skill: "Nerd"},
+      {emoji: "🧙‍♂️", skill: "Skill Wizard"},
+      {emoji: "🤖", skill: "Techie"},
+      {emoji: "🕺", skill: "Party Dude"}
+    ];
+
+    // Expanded tips pool (cool, roast, funny)
+    const tipsArr = [
+      "Bhai, skills toh full on hai, dahej mein Lamborghini mang le! 🤑",
+      "Itne skills hai, shaadi mein DJ bhi tu hi ban ja! 💃🎤",
+      "Dahej ka hisaab chhodo, apne swag pe dhyaan do! 😎",
+      "Salary achhi hai, lekin boss ki daant bhi roz milti hogi! 😂",
+      "Cooking aati hai toh sasuma khush, nahi toh Swiggy ready hai! 👩‍🍳🍔",
+      "Jitni skills, utni jaldi ghar bas jayega! 🏡",
+      "Gardening aati hai? Shaadi ke baad lawn tu hi sambhal! 🌱",
+      "Bhai, ‘Other’ skill daala toh rishta premium ho gaya! 🌟",
+      "Ek skill aur daal, dahej ka meter phir se ghoom jayega! 🔥",
+      "Dahej calculator bhi hairaan, itne skills kis factory se aaye? 🤖",
+      "Dahej ki value badh gayi, ab mummy bhi impress ho jayegi! 😄",
+      "Shaadi ke baad dance floor pe scene tumhare naam! 💃🕺",
+      "Itna dahej, ab shaadi mein helicopter entry fix! 🚁",
+      "Rishta dekhne aaye toh coding ka demo mat de dena! 👨‍💻",
+      "Salary toh mast hai, lekin EMI bhi utni hi hogi! 💸",
+      "Skills ka collection itna bada, LinkedIn bhi jealous ho jayega! 😜",
+      "Kya baat hai, dahej ke saath swag bhi full loaded! 😎",
+      "Singing aati hai? Shaadi mein sangeet tumhi sambhalo! 🎤",
+      "Managing aati hai? Ghar ki saari planning tumhare hawale! 🗂️",
+      "Creativity level high, ab shaadi ke card bhi designer banwa lo! 🎨"
+    ];
+
+    const skillsSelect = document.getElementById('skills');
+    const otherSkillTextarea = document.getElementById('otherSkill');
+    skillsSelect.addEventListener('change', function() {
+      const selected = Array.from(skillsSelect.selectedOptions).map(o => o.value);
+      if (selected.includes("Other")) {
+        otherSkillTextarea.style.display = 'block';
+      } else {
+        otherSkillTextarea.style.display = 'none';
+        otherSkillTextarea.value = '';
+      }
+    });
+
+    document.getElementById('worthForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const property = parseInt(document.getElementById('property').value) || 0;
+      const salary = parseInt(document.getElementById('salary').value) || 0;
+      const selectedSkills = Array.from(skillsSelect.selectedOptions).map(o => o.value);
+      let skillCount = selectedSkills.length;
+
+      let otherSkillText = otherSkillTextarea.value.trim();
+      let skillsFinal = [...selectedSkills];
+      if (selectedSkills.includes("Other") && otherSkillText.length > 0) {
+        skillsFinal.push(otherSkillText);
+      } else if (selectedSkills.includes("Other")) {
+        skillCount--;
+        skillsFinal.pop();
+      }
+
+      // Calculate worth
+      const worth = property + skillCount * 20000 + salary * 12;
+
+      // Avatar logic: pick emoji related to first skill, else random
+      let avatarEmoji = "🦸‍♂️"; // Default all-rounder
+      if (skillsFinal.length > 0) {
+        // Try to match first skill
+        let firstSkill = skillsFinal[0];
+        let avatarObj = avatarPool.find(a => firstSkill.includes(a.skill));
+        avatarEmoji = avatarObj ? avatarObj.emoji : avatarPool[Math.floor(Math.random() * avatarPool.length)].emoji;
+      } else {
+        avatarEmoji = avatarPool[Math.floor(Math.random() * avatarPool.length)].emoji;
+      }
+
+      // Generate skill badges
+      let badgesHtml = "";
+      if (skillsFinal.length > 0) {
+        badgesHtml = '<div class="skill-badges">' +
+          skillsFinal.map(s => `<span class="skill-chip">${s}</span>`).join("") +
+          '</div>';
+      }
+
+      // Random tip
+      const tip = tipsArr[Math.floor(Math.random() * tipsArr.length)];
+
+      // Show result card
+      document.getElementById('resultArea').innerHTML = `
+        <div class="result-card">
+          <div class="avatar">${avatarEmoji}</div>
+          <div class="worth">Aapko total dahej milega:<br>₹${worth.toLocaleString('en-IN')}</div>
+          ${badgesHtml}
+          <div class="tip">${tip}</div>
+        </div>
+      `;
+    });
+  </script>
 </body>
 </html>
