@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -14,13 +13,13 @@
       background: linear-gradient(135deg, #1a1a2e 0%, #3a0ca3 100%);
       color: #fff;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
-
     .container {
       max-width: 470px;
-      margin: 40px auto;
+      margin: 40px auto 20px auto;
       background: rgba(20, 20, 40, 0.92);
       border-radius: 22px;
       padding: 30px;
@@ -28,8 +27,9 @@
       border: 2px solid rgba(138, 43, 226, 0.5);
       overflow-y: auto;
       max-height: 96vh;
+      position: relative;
+      z-index: 1;
     }
-
     h1 {
       text-align: center;
       font-size: 2.3em;
@@ -43,14 +43,12 @@
       0% {transform: translateY(0);}
       100% {transform: translateY(-10px);}
     }
-
     label {
       display: block;
       font-size: 1.08em;
       margin-bottom: 5px;
       color: #eee;
     }
-
     input, select, textarea {
       width: 100%;
       padding: 10px;
@@ -65,18 +63,15 @@
       box-shadow: 0 0 7px rgba(138,43,226,0.23);
       transition: 0.3s all ease-in-out;
     }
-
     input:focus, select:focus, textarea:focus {
       box-shadow: 0 0 15px #bb86fc;
       background: rgba(255,255,255,0.13);
     }
-
     select[multiple] {
       height: 90px;
       background: rgba(255,255,255,0.07);
       color: #fff;
     }
-
     button {
       background: linear-gradient(90deg, #bb86fc, #9b5de5);
       color: #fff;
@@ -91,12 +86,10 @@
       box-shadow: 0 0 14px #bb86fc, 0 0 28px #9b5de5;
       transition: 0.3s all ease-in-out;
     }
-
     button:hover {
       box-shadow: 0 0 23px #bb86fc, 0 0 50px #9b5de5;
       transform: scale(1.07);
     }
-
     .result-card {
       margin-top: 22px;
       background: linear-gradient(117deg, #3a0ca3 55%, #bb86fc 100%);
@@ -107,13 +100,12 @@
       animation: pop 0.7s;
       position: relative;
       overflow: hidden;
+      z-index: 2;
     }
-
     @keyframes pop {
       0% {transform: scale(0.7);}
       100% {transform: scale(1);}
     }
-
     .avatar {
       font-size: 3.5em;
       margin-bottom: 6px;
@@ -125,7 +117,6 @@
       60% {transform: scale(1.2) rotate(10deg);}
       100% {transform: scale(1) rotate(0);}
     }
-
     .worth {
       font-size: 2em;
       color: #fff44f;
@@ -136,7 +127,6 @@
       font-weight: bold;
       margin-bottom: 10px;
     }
-
     .skill-badges {
       margin: 10px 0;
       display: flex;
@@ -160,7 +150,18 @@
       0% {transform: scale(0.6);}
       100% {transform: scale(1);}
     }
-
+    .education-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, #fff44f 70%, #bb86fc 100%);
+      color: #1a1a2e;
+      padding: 4px 14px;
+      border-radius: 12px;
+      font-size: 1.09em;
+      font-weight: 600;
+      margin-bottom: 7px;
+      margin-top: 1px;
+      box-shadow: 0 1px 7px #bb86fc;
+    }
     .tip {
       margin-top: 12px;
       font-size: 1.13em;
@@ -176,7 +177,6 @@
       from {opacity: 0;}
       to {opacity: 1;}
     }
-
     .credit {
       margin-top: 20px;
       text-align: center;
@@ -186,7 +186,23 @@
       font-style: italic;
       letter-spacing: 1px;
     }
-
+    /* Firecracker animations */
+    .firework {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fff44f;
+      box-shadow: 0 0 20px #ff56a3, 0 0 40px #fff44f, 0 0 60px #ff56a3;
+      animation: explode 1.1s ease-out forwards;
+    }
+    @keyframes explode {
+      0% {opacity: 1; transform: scale(0.7);}
+      80% {opacity: 1; transform: scale(1.7);}
+      100% {opacity: 0; transform: scale(0);}
+    }
     @media (max-width: 600px) {
       .container {
         max-width: 98vw;
@@ -206,7 +222,7 @@
       .avatar {
         font-size: 2.3em;
       }
-      .skill-chip {
+      .skill-chip, .education-badge {
         font-size: 0.91em;
         padding: 2px 8px;
       }
@@ -214,11 +230,38 @@
   </style>
 </head>
 <body>
+  <!-- Google Form at the top -->
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScy3d_-QwQQ8B1igiCuUEUE9rW9kmf0HyR0y6om3meCPTtz7g/viewform?embedded=true" 
+    width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0"
+    style="display:block; margin: 20px auto; border-radius: 15px; box-shadow: 0 0 20px #3a0ca3;">
+    Loading…
+  </iframe>
+
   <div class="container">
     <h1>DAHEJ CALCULATOR💵</h1>
     <form id="worthForm">
-      <label for="property">Property (₹):</label>
+      <label for="property">Property ( write the amount in ₹):</label>
       <input type="number" id="property" min="0" placeholder="Apni property ka amount daalo" required>
+
+      <label for="education">Education:</label>
+      <select id="education" required>
+        <option value="Anpadh">Anpadh</option>
+        <option value="10th Pass">10th Pass</option>
+        <option value="12th Pass">12th Pass</option>
+        <option value="Pursuing Graduation">Pursuing Graduation</option>
+        <option value="Pursuing Master's">Pursuing Master's</option>
+      </select>
+
+      <div id="courseContainer" style="display:none;">
+        <label for="courseSelect" id="courseLabel"></label>
+        <select id="courseSelect"></select>
+      </div>
+
+      <label for="marriageType">Marriage Type:</label>
+      <select id="marriageType" required>
+        <option value="Arrange Marriage">Arrange Marriage</option>
+        <option value="Love Marriage">Love Marriage</option>
+      </select>
 
       <label for="salary">Salary per month (₹):</label>
       <input type="number" id="salary" min="0" placeholder="Apni mahine ki salary daalo" required>
@@ -243,10 +286,37 @@
     </form>
 
     <div id="resultArea"></div>
-    <div class="credit">Programmed by Shivam 😎</div>
+    <div class="credit">Programmed by Shivam aur wo 5 log😎</div>
   </div>
 
+  <!-- Firework sound (short mp3, CC0, you can change to your own link) -->
+  <audio id="fireworkSound" src="https://cdn.pixabay.com/audio/2022/07/26/audio_123936a78b.mp3"></audio>
+
   <script>
+    // Course values
+    const ugCourses = [
+      {name: 'B.Com', value: 50000},
+      {name: 'B.Sc', value: 60000},
+      {name: 'BA', value: 40000},
+      {name: 'BBA', value: 70000},
+      {name: 'BCA', value: 100000},
+      {name: 'B.Pharm', value: 90000},
+      {name: 'BSW (Social Work)', value: 35000},
+      {name: 'B.Ed', value: 50000},
+      {name: 'BJMC (Journalism)', value: 60000}
+    ];
+    const pgCourses = [
+      {name: 'MBA', value: 150000},
+      {name: 'M.Sc', value: 120000},
+      {name: 'MA', value: 100000},
+      {name: 'M.Com', value: 110000},
+      {name: 'MCA', value: 130000},
+      {name: 'M.Pharm', value: 135000},
+      {name: 'MSW (Social Work)', value: 90000},
+      {name: 'M.Ed', value: 100000},
+      {name: 'MJMC (Journalism)', value: 110000}
+    ];
+
     // Avatar pool: 20 fun emojis
     const avatarPool = [
       {emoji: "👨‍🍳", skill: "Cooking"},
@@ -295,6 +365,27 @@
       "Creativity level high, ab shaadi ke card bhi designer banwa lo! 🎨"
     ];
 
+    // Handle course dropdown logic
+    const educationSelect = document.getElementById('education');
+    const courseContainer = document.getElementById('courseContainer');
+    const courseLabel = document.getElementById('courseLabel');
+    const courseSelect = document.getElementById('courseSelect');
+
+    educationSelect.addEventListener('change', function() {
+      if (educationSelect.value === "Pursuing Graduation") {
+        courseLabel.innerText = "Which graduation course?";
+        courseSelect.innerHTML = ugCourses.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+        courseContainer.style.display = "block";
+      } else if (educationSelect.value === "Pursuing Master's") {
+        courseLabel.innerText = "Which master's course?";
+        courseSelect.innerHTML = pgCourses.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+        courseContainer.style.display = "block";
+      } else {
+        courseContainer.style.display = "none";
+      }
+    });
+
+    // Skills logic
     const skillsSelect = document.getElementById('skills');
     const otherSkillTextarea = document.getElementById('otherSkill');
     skillsSelect.addEventListener('change', function() {
@@ -307,10 +398,32 @@
       }
     });
 
+    // Firecracker animation function
+    function showFireworks(count=14) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          let firework = document.createElement('div');
+          firework.className = 'firework';
+          let angle = Math.random() * 2 * Math.PI;
+          let radius = 120 + Math.random()*40;
+          let x = window.innerWidth/2 + Math.cos(angle)*radius + (Math.random()*120-60);
+          let y = 180 + Math.sin(angle)*radius + (Math.random()*80-40);
+          firework.style.left = x + 'px';
+          firework.style.top = y + 'px';
+          firework.style.background = `hsl(${Math.random()*360}, 90%, 60%)`;
+          document.body.appendChild(firework);
+          setTimeout(() => firework.remove(), 1200);
+        }, i*75);
+      }
+      document.getElementById('fireworkSound').play();
+    }
+
     document.getElementById('worthForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
       const property = parseInt(document.getElementById('property').value) || 0;
+      const education = educationSelect.value;
+      const marriageType = document.getElementById('marriageType').value;
       const salary = parseInt(document.getElementById('salary').value) || 0;
       const selectedSkills = Array.from(skillsSelect.selectedOptions).map(o => o.value);
       let skillCount = selectedSkills.length;
@@ -324,13 +437,59 @@
         skillsFinal.pop();
       }
 
+      // Marriage type check
+      if (marriageType === "Love Marriage") {
+        document.getElementById('resultArea').innerHTML = `
+          <div class="result-card">
+            <div class="avatar">😝😂</div>
+            <div class="education-badge">${education}</div>
+            <div class="tip">Tu kyu dahej le rha hai bhai...teko toh dena chaiye aur 😝😂</div>
+          </div>
+        `;
+        return;
+      }
+
+      // Education logic
+      let eduValue = 0;
+      let eduBadge = "";
+      let courseVal = 0;
+      let courseName = "";
+
+      if (education === "Anpadh") {
+        document.getElementById('resultArea').innerHTML = `
+          <div class="result-card">
+            <div class="avatar">😶</div>
+            <div class="education-badge">${education}</div>
+            <div class="tip">Tere se shaadi kaun karega? 😂</div>
+          </div>
+        `;
+        return;
+      } else if (education === "10th Pass") {
+        eduValue = 20000;
+        eduBadge = `<div class="education-badge">10th Pass (+₹20,000)</div>`;
+      } else if (education === "12th Pass") {
+        eduValue = 30000;
+        eduBadge = `<div class="education-badge">12th Pass (+₹30,000)</div>`;
+      } else if (education === "Pursuing Graduation") {
+        courseName = courseSelect.value;
+        const found = ugCourses.find(c => c.name === courseName);
+        courseVal = found ? found.value : 0;
+        eduValue = courseVal;
+        eduBadge = `<div class="education-badge">${courseName} (+₹${courseVal.toLocaleString('en-IN')})</div>`;
+      } else if (education === "Pursuing Master's") {
+        courseName = courseSelect.value;
+        const found = pgCourses.find(c => c.name === courseName);
+        courseVal = found ? found.value : 0;
+        eduValue = courseVal;
+        eduBadge = `<div class="education-badge">${courseName} (+₹${courseVal.toLocaleString('en-IN')})</div>`;
+      }
+
       // Calculate worth
-      const worth = const worth = (property / 4) + skillCount * 10000 + salary * 12;
+      const worth = (property / 4) + skillCount * 10000 + salary * 12 + eduValue;
 
       // Avatar logic: pick emoji related to first skill, else random
-      let avatarEmoji = "🦸‍♂️"; // Default all-rounder
+      let avatarEmoji = "🦸‍♂️";
       if (skillsFinal.length > 0) {
-        // Try to match first skill
         let firstSkill = skillsFinal[0];
         let avatarObj = avatarPool.find(a => firstSkill.includes(a.skill));
         avatarEmoji = avatarObj ? avatarObj.emoji : avatarPool[Math.floor(Math.random() * avatarPool.length)].emoji;
@@ -338,7 +497,7 @@
         avatarEmoji = avatarPool[Math.floor(Math.random() * avatarPool.length)].emoji;
       }
 
-      // Generate skill badges
+      // Skill badges
       let badgesHtml = "";
       if (skillsFinal.length > 0) {
         badgesHtml = '<div class="skill-badges">' +
@@ -349,12 +508,18 @@
       // Random tip
       const tip = tipsArr[Math.floor(Math.random() * tipsArr.length)];
 
+      // Firework animation and sound if worth >= 2000000
+      if (worth >= 2000000) {
+        showFireworks();
+      }
+
       // Show result card
       document.getElementById('resultArea').innerHTML = `
         <div class="result-card">
           <div class="avatar">${avatarEmoji}</div>
           <div class="worth">Aapko total dahej milega:<br>₹${worth.toLocaleString('en-IN')}</div>
           ${badgesHtml}
+          ${eduBadge}
           <div class="tip">${tip}</div>
         </div>
       `;
