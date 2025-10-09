@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <title>DAHEJ CALCULATOR</title>
+  <title>GIFTS CALCULATOR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
@@ -22,7 +22,7 @@
       margin: 40px auto 20px auto;
       background: rgba(20, 20, 40, 0.92);
       border-radius: 22px;
-      padding: 30px;
+      padding: 30px 20px;
       box-shadow: 0 0 32px rgba(138, 43, 226, 0.5);
       border: 2px solid rgba(138, 43, 226, 0.5);
       overflow-y: auto;
@@ -177,31 +177,75 @@
       from {opacity: 0;}
       to {opacity: 1;}
     }
-    .credit {
-      margin-top: 20px;
+    .fill-form-message {
+      margin-top: 18px;
+      font-size: 1.23em;
+      color: #fff44f;
+      font-weight: bold;
       text-align: center;
-      font-size: 0.98em;
-      color: #bbb;
-      opacity: 0.82;
-      font-style: italic;
+      background: #3a0ca3;
+      border-radius: 14px;
+      padding: 10px 8px;
+      box-shadow: 0 0 10px #fff44f;
       letter-spacing: 1px;
+      animation: formMsgAnim 1.5s infinite alternate;
     }
-    /* Firecracker animations */
-    .firework {
-      position: fixed;
-      pointer-events: none;
-      z-index: 999;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #fff44f;
-      box-shadow: 0 0 20px #ff56a3, 0 0 40px #fff44f, 0 0 60px #ff56a3;
-      animation: explode 1.1s ease-out forwards;
+    @keyframes formMsgAnim {
+      0% {background: #3a0ca3;}
+      100% {background: #bb86fc;}
     }
-    @keyframes explode {
-      0% {opacity: 1; transform: scale(0.7);}
-      80% {opacity: 1; transform: scale(1.7);}
-      100% {opacity: 0; transform: scale(0);}
+    .credit {
+      margin: 26px auto 4px auto;
+      text-align: center;
+      font-size: 1.22em;
+      font-weight: bold;
+      color: #fff;
+      background: #111;
+      border-radius: 15px;
+      padding: 18px 15px;
+      box-shadow: 0 0 18px #bb86fc, 0 0 6px #fff44f;
+      letter-spacing: 2px;
+      position: relative;
+      border: 2px solid;
+      border-image: linear-gradient(90deg, #bb86fc 40%, #fff44f 100%) 1;
+      text-shadow: 0 0 8px #bb86fc, 0 0 18px #fff44f;
+      animation: creditPulse 2s infinite alternate;
+    }
+    @keyframes creditPulse {
+      0% {
+        box-shadow: 0 0 18px #bb86fc, 0 0 6px #fff44f;
+        transform: scale(1) rotate(-1deg);
+      }
+      50% {
+        box-shadow: 0 0 32px #bb86fc, 0 0 18px #fff44f;
+        transform: scale(1.05) rotate(1deg);
+      }
+      100% {
+        box-shadow: 0 0 18px #bb86fc, 0 0 6px #fff44f;
+        transform: scale(1) rotate(-1deg);
+      }
+    }
+    .form-feedback-msg {
+      font-size: 1.12em;
+      text-align: center;
+      margin-bottom: 22px;
+      margin-top: 10px;
+      color: #fff;
+      background: linear-gradient(90deg, #3a0ca3 40%, #bb86fc 100%);
+      border-radius: 9px;
+      padding: 9px 12px;
+      box-shadow: 0 0 10px #bb86fc;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+    .form-container {
+      max-width: 470px;
+      margin: 20px auto 50px auto;
+      background: rgba(255,255,255,0.10);
+      border-radius: 18px;
+      padding: 16px 4px 8px 4px;
+      box-shadow: 0 0 16px #bb86fc;
+      text-align: center;
     }
     @media (max-width: 600px) {
       .container {
@@ -226,23 +270,31 @@
         font-size: 0.91em;
         padding: 2px 8px;
       }
+      .credit {
+        font-size: 1em;
+        padding: 10px 6px;
+      }
+      .fill-form-message {
+        font-size: 1em;
+        padding: 7px 5px;
+      }
+      .form-container {
+        max-width: 99vw;
+        padding: 8px 1px 6px 1px;
+      }
+      .form-feedback-msg {
+        font-size: 1em;
+        padding: 7px 5px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Google Form at the top -->
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScy3d_-QwQQ8B1igiCuUEUE9rW9kmf0HyR0y6om3meCPTtz7g/viewform?embedded=true" 
-    width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0"
-    style="display:block; margin: 20px auto; border-radius: 15px; box-shadow: 0 0 20px #3a0ca3;">
-    Loading…
-  </iframe>
-
   <div class="container">
-    <h1>DAHEJ CALCULATOR💵</h1>
+    <h1>GIFTS CALCULATOR💵</h1>
     <form id="worthForm">
       <label for="property">Property ( write the amount in ₹):</label>
       <input type="number" id="property" min="0" placeholder="Apni property ka amount daalo" required>
-
       <label for="education">Education:</label>
       <select id="education" required>
         <option value="Anpadh">Anpadh</option>
@@ -251,21 +303,17 @@
         <option value="Pursuing Graduation">Pursuing Graduation</option>
         <option value="Pursuing Master's">Pursuing Master's</option>
       </select>
-
       <div id="courseContainer" style="display:none;">
         <label for="courseSelect" id="courseLabel"></label>
         <select id="courseSelect"></select>
       </div>
-
       <label for="marriageType">Marriage Type:</label>
       <select id="marriageType" required>
         <option value="Arrange Marriage">Arrange Marriage</option>
         <option value="Love Marriage">Love Marriage</option>
       </select>
-
       <label for="salary">Salary per month (₹):</label>
       <input type="number" id="salary" min="0" placeholder="Apni mahine ki salary daalo" required>
-
       <label for="skills">Skills select karo (multiple choose kar sakte ho):</label>
       <select id="skills" multiple>
         <option value="Cooking">Cooking 🍳</option>
@@ -281,17 +329,24 @@
         <option value="Other">Other (Neeche likho)</option>
       </select>
       <textarea id="otherSkill" placeholder="Yahan apni special skill likho (agar upar nahi hai)" style="display:none;"></textarea>
-
-      <button type="submit">Calculate Dahej 🚀</button>
+      <button type="submit">Calculate your gifts 🚀</button>
     </form>
-
     <div id="resultArea"></div>
-    <div class="credit">Programmed by Shivam aur wo 5 log😎</div>
+    <div id="fillFormMsg"></div>
+    <div class="credit">
+      ✨ Programmed by Shivam aur wo 5 log 😎 ✨
+    </div>
+    <div class="form-feedback-msg">
+      fill this form for feedback
+    </div>
   </div>
-
-  <!-- Firework sound (short mp3, CC0, you can change to your own link) -->
+  <div class="form-container">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScy3d_-QwQQ8B1igiCuUEUE9rW9kmf0HyR0y6om3meCPTtz7g/viewform?embedded=true"
+      width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 12px;">
+      Loading…
+    </iframe>
+  </div>
   <audio id="fireworkSound" src="https://cdn.pixabay.com/audio/2022/07/26/audio_123936a78b.mp3"></audio>
-
   <script>
     // Course values
     const ugCourses = [
@@ -316,8 +371,6 @@
       {name: 'M.Ed', value: 100000},
       {name: 'MJMC (Journalism)', value: 110000}
     ];
-
-    // Avatar pool: 20 fun emojis
     const avatarPool = [
       {emoji: "👨‍🍳", skill: "Cooking"},
       {emoji: "💃", skill: "Dancing"},
@@ -340,8 +393,6 @@
       {emoji: "🤖", skill: "Techie"},
       {emoji: "🕺", skill: "Party Dude"}
     ];
-
-    // Expanded tips pool (cool, roast, funny)
     const tipsArr = [
       "Bhai, skills toh full on hai, dahej mein Lamborghini mang le! 🤑",
       "Itne skills hai, shaadi mein DJ bhi tu hi ban ja! 💃🎤",
@@ -365,7 +416,7 @@
       "Creativity level high, ab shaadi ke card bhi designer banwa lo! 🎨"
     ];
 
-    // Handle course dropdown logic
+    // Dropdown logic: fix for blank selection
     const educationSelect = document.getElementById('education');
     const courseContainer = document.getElementById('courseContainer');
     const courseLabel = document.getElementById('courseLabel');
@@ -375,10 +426,12 @@
       if (educationSelect.value === "Pursuing Graduation") {
         courseLabel.innerText = "Which graduation course?";
         courseSelect.innerHTML = ugCourses.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+        courseSelect.selectedIndex = 0;
         courseContainer.style.display = "block";
       } else if (educationSelect.value === "Pursuing Master's") {
         courseLabel.innerText = "Which master's course?";
         courseSelect.innerHTML = pgCourses.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+        courseSelect.selectedIndex = 0;
         courseContainer.style.display = "block";
       } else {
         courseContainer.style.display = "none";
@@ -398,7 +451,7 @@
       }
     });
 
-    // Firecracker animation function
+    // Firecracker animation
     function showFireworks(count=14) {
       for (let i = 0; i < count; i++) {
         setTimeout(() => {
@@ -420,11 +473,10 @@
 
     document.getElementById('worthForm').addEventListener('submit', function(e) {
       e.preventDefault();
-
-      const property = parseInt(document.getElementById('property').value) || 0;
+      const property = Math.max(0, parseInt(document.getElementById('property').value) || 0);
       const education = educationSelect.value;
       const marriageType = document.getElementById('marriageType').value;
-      const salary = parseInt(document.getElementById('salary').value) || 0;
+      const salary = Math.max(0, parseInt(document.getElementById('salary').value) || 0);
       const selectedSkills = Array.from(skillsSelect.selectedOptions).map(o => o.value);
       let skillCount = selectedSkills.length;
 
@@ -446,6 +498,7 @@
             <div class="tip">Tu kyu dahej le rha hai bhai...teko toh dena chaiye aur 😝😂</div>
           </div>
         `;
+        document.getElementById('fillFormMsg').innerHTML = `<div class="fill-form-message">Calculate toh kar liya ab niche ka form v bhr do...</div>`;
         return;
       }
 
@@ -454,7 +507,6 @@
       let eduBadge = "";
       let courseVal = 0;
       let courseName = "";
-
       if (education === "Anpadh") {
         document.getElementById('resultArea').innerHTML = `
           <div class="result-card">
@@ -463,6 +515,7 @@
             <div class="tip">Tere se shaadi kaun karega? 😂</div>
           </div>
         `;
+        document.getElementById('fillFormMsg').innerHTML = `<div class="fill-form-message">Calculate toh kar liya ab niche ka form v bhr do...</div>`;
         return;
       } else if (education === "10th Pass") {
         eduValue = 20000;
@@ -471,13 +524,13 @@
         eduValue = 30000;
         eduBadge = `<div class="education-badge">12th Pass (+₹30,000)</div>`;
       } else if (education === "Pursuing Graduation") {
-        courseName = courseSelect.value;
+        courseName = courseSelect.value || ugCourses[0].name;
         const found = ugCourses.find(c => c.name === courseName);
         courseVal = found ? found.value : 0;
         eduValue = courseVal;
         eduBadge = `<div class="education-badge">${courseName} (+₹${courseVal.toLocaleString('en-IN')})</div>`;
       } else if (education === "Pursuing Master's") {
-        courseName = courseSelect.value;
+        courseName = courseSelect.value || pgCourses[0].name;
         const found = pgCourses.find(c => c.name === courseName);
         courseVal = found ? found.value : 0;
         eduValue = courseVal;
@@ -487,7 +540,7 @@
       // Calculate worth
       const worth = (property / 4) + skillCount * 10000 + salary * 12 + eduValue;
 
-      // Avatar logic: pick emoji related to first skill, else random
+      // Avatar logic
       let avatarEmoji = "🦸‍♂️";
       if (skillsFinal.length > 0) {
         let firstSkill = skillsFinal[0];
@@ -513,16 +566,17 @@
         showFireworks();
       }
 
-      // Show result card
+      // Show result card and the fill form message
       document.getElementById('resultArea').innerHTML = `
         <div class="result-card">
           <div class="avatar">${avatarEmoji}</div>
-          <div class="worth">Aapko total dahej milega:<br>₹${worth.toLocaleString('en-IN')}</div>
+          <div class="worth">Aapko total gifts milega:<br>₹${worth.toLocaleString('en-IN')}</div>
           ${badgesHtml}
           ${eduBadge}
           <div class="tip">${tip}</div>
         </div>
       `;
+      document.getElementById('fillFormMsg').innerHTML = `<div class="fill-form-message">Calculate toh kar liya ab niche ka form v bhr do...</div>`;
     });
   </script>
 </body>
